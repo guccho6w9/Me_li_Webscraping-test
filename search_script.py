@@ -1,5 +1,6 @@
 import os
 import json
+import csv
 import requests
 from lxml import html
 
@@ -84,9 +85,24 @@ productos_baratos = obtener_productos(url_ascendente, cookies, headers, num_prod
 productos_caros = obtener_productos(url_descendente, cookies, headers, num_productos, productos_por_pagina)
 
 # Guardar los productos en un archivo JSON
-output_products_path = "output_dir/output.json"
-os.makedirs(os.path.dirname(output_products_path), exist_ok=True)
-with open(output_products_path, "w", encoding="utf-8") as file:
+output_products_path_json = "output_dir/output.json"
+os.makedirs(os.path.dirname(output_products_path_json), exist_ok=True)
+with open(output_products_path_json, "w", encoding="utf-8") as file:
     json.dump({"baratos": productos_baratos, "caros": productos_caros}, file, ensure_ascii=False, indent=4)
 
-print(f"Se guardaron los productos en {output_products_path}")
+print(f"Se guardaron los productos en {output_products_path_json}")
+
+# Guardar los productos en un archivo CSV
+output_products_path_csv = "output_dir/output.csv"
+os.makedirs(os.path.dirname(output_products_path_csv), exist_ok=True)
+
+# Usar la primera entrada para obtener las claves de los encabezados
+headers_csv = productos_baratos[0].keys() if productos_baratos else []
+
+with open(output_products_path_csv, mode="w", newline='', encoding="utf-8") as file:
+    writer = csv.DictWriter(file, fieldnames=headers_csv)
+    writer.writeheader()  # Escribir los encabezados en el CSV
+    # Escribir los productos de la lista de baratos y caros
+    writer.writerows(productos_baratos + productos_caros)
+
+print(f"Se guardaron los productos en {output_products_path_csv}")
