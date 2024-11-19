@@ -16,7 +16,7 @@ The results are saved as:
 - "output.json"
 - "output.csv"
 
-### Example:
+### Json example:
 ```
 "baratos": [
         {
@@ -32,9 +32,25 @@ The results are saved as:
         },
 ```
 
+### CSV example:
+
+| num_producto | MLA_ID        | product_ID | keywords | title                                        | price | currency | url                                                                                          | image                                                                    |
+|--------------|---------------|------------|----------|----------------------------------------------|-------|----------|----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| 1            | MLA1918166792 | null       | pc-gamer | Pc Notebook Instalación De Sistema Operativo | 76500 | ARS      | articulo.mercadolibre.com.ar/MLA-1918166792-pc-notebook-instalacion-de-sistema-operativo-_JM | https://http2.mlstatic.com/D_Q_NP_2X_894482-MLA79303529320_092024-V.webp |
+|              |               |            |          |                                              |       |          |                                                                                              |                                                                          |
+|              |               |            |          |                                              |       |          |                                                                                              |                                                                          |
 
 
 
+### Dependencies:
+```txt
+# /requirements.txt
+
+lxml==5.1.0
+requests==2.31.0
+
+# Install dependences
+$ pip install -r requirements.txt
 
 
 
